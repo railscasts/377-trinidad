@@ -1,0 +1,17 @@
+server {
+  listen 80 default deferred;
+  # server_name example.com;
+  root <%= current_path %>/public;
+
+  location ^~ /assets/ {
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  # TODO: Proxy to Rails app here.
+
+  error_page 500 502 503 504 /500.html;
+  client_max_body_size 4G;
+  keepalive_timeout 10;
+}
